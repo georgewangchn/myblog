@@ -92,10 +92,17 @@ import {pageTag, pageDescription,aboutTdk} from '../data/content';
 				<p style="margin-top:12px;">
 					📮 邮箱：<a href="mailto:aigeorge@qq.com">aigeorge@qq.com</a>
 				</p>
-				<p>
-					💬 GitHub：<a href="https://github.com/georgewangchn" target="_blank">@georgewangchn</a>
-				</p>
+			<p>
+				💬 GitHub：<a href="https://github.com/georgewangchn" target="_blank">@georgewangchn</a>
+			</p>
+			<p>
+				📱 微信公众号：森林瀑布的技术笔记
+			</p>
+			<div class="wechat-qr">
+				<img src="/weinxin.png" alt="微信公众号二维码" width="220" height="220" />
+				<p class="wechat-qr__hint">扫码关注</p>
 			</div>
+		</div>
 		</section>
 	</main>
 	</div>
@@ -151,5 +158,21 @@ import {pageTag, pageDescription,aboutTdk} from '../data/content';
 		font-size: 0.9rem;
 		color: var(--color-400);
 		line-height: 1.7;
+	}
+	.wechat-qr {
+		margin: 1.2rem 0 0.5rem;
+		text-align: left;
+	}
+	.wechat-qr img {
+		border-radius: 10px;
+		border: 1px solid var(--color-800);
+		width: 220px;
+		height: 220px;
+		object-fit: cover;
+	}
+	.wechat-qr__hint {
+		margin-top: 0.4rem;
+		font-size: 0.85rem;
+		color: var(--color-400);
 	}
 </style>
