@@ -66,6 +66,10 @@ const articleData = {
 				</div>
 			</section>
 
+			<div class="post-line post-line-views text-center">
+				<span>本文阅读量 <span id="vercount_value_page_pv">—</span> 次</span>
+			</div>
+
 		</main>
 	</div>
 
@@ -103,6 +107,18 @@ const articleData = {
 		font-size: .8rem;
 		white-space: nowrap;
 		color:var(--color-500);
+	}
+	.post-line-views{
+		border-top: 1px dashed var(--color-700);
+		padding-top: .75rem;
+		margin: 1.5rem auto 0;
+		font-size: .8rem;
+		white-space: nowrap;
+		color:var(--color-500);
+	}
+	.post-line-views span span {
+		color: var(--accent-regular);
+		font-weight: 500;
 	}
 	.title-tag{
 		display: inline-block;
