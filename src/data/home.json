@@ -1,5 +1,29 @@
 [
 	{
+		"id": "palantir1",
+		"cover": "/assets/cover/cover-agent.svg",
+		"title": "Palantir 还是太全面了",
+		"desc": "扒完 Palantir 官网和文档：它真正难复制的不是某个产品，而是从数据到语义、到行动、再回到业务数据的完整闭环。",
+		"url": "/blog/palantir-comprehensive/",
+		"detail": "/blog/palantir-comprehensive/",
+		"category": "agent",
+		"tag": "Palantir",
+		"date": "2026-08-27",
+		"mark": true
+	},
+	{
+		"id": "palantir2",
+		"cover": "/assets/cover/palantir-ontology-grew.png",
+		"title": "Palantir 是长出来的",
+		"desc": "Palantir 的本体不是白板上设计出来的，而是在长期数据工程和结构化业务系统上一点一点长出来的——土壤做厚，本体自然结果。",
+		"url": "/blog/palantir-ontology-grew/",
+		"detail": "/blog/palantir-ontology-grew/",
+		"category": "agent",
+		"tag": "Palantir",
+		"date": "2026-08-27",
+		"mark": true
+	},
+	{
 		"id": "p1",
 		"cover": "/assets/cover/cover-owl.svg",
 		"title": "P1 · OWL / HermiT 本体推理",
