@@ -24,6 +24,18 @@
 		"mark": true
 	},
 	{
+		"id": "ousheng1",
+		"cover": "/assets/cover/cover-opensource.svg",
+		"title": "牵着牛走两步：OuSheng 迭代验证与开源",
+		"desc": "绳子编出来了，套上牛，走两步——TDD 逼出五个 bug，两轮新手模拟跑通完整协作链路，才敢 push 到 GitHub。",
+		"url": "/blog/ousheng-iteration-verification-opensource/",
+		"detail": "/blog/ousheng-iteration-verification-opensource/",
+		"category": "agent",
+		"tag": "OuSheng",
+		"date": "2026-08-10",
+		"mark": true
+	},
+	{
 		"id": "p1",
 		"cover": "/assets/cover/cover-owl.svg",
 		"title": "P1 · OWL / HermiT 本体推理",
