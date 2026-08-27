@@ -37,14 +37,14 @@ if (!UMAMIId) {
 )}
 
 <!-- 百度统计 跟踪代码 -->
+<!-- 注意：ID 必须在构建时烤进脚本源码（set:html），不能用运行时变量拼接。
+     百度验证爬虫只抓 HTML 源码做字符串匹配，看不到 JS 执行后的 URL。 -->
 {baiduId && (
-    <script is:inline define:vars={{ baiduId }}>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?" + baiduId;
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
+    <script is:inline set:html={`var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?${baiduId}";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();`} />
 )}
