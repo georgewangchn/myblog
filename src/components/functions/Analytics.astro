@@ -1,7 +1,9 @@
 ---
 const gaId = import.meta.env.PUBLIC_GA4_ID;
 const UMAMIId = import.meta.env.PUBLIC_UMAMI_ID;
-// const gaId = '';
+// 百度统计 ID：优先读环境变量，未配置时回退到站点默认 ID（公开非密）
+const baiduId = import.meta.env.PUBLIC_BAIDU_ID || '7b85d8cf7047e5ec75aed3bca6459784';
+// const gaId = ''; 
 
 if (!gaId) {
     //console.warn("Google Analytics ID (PUBLIC_GA4_ID) is missing!");
@@ -32,4 +34,17 @@ if (!UMAMIId) {
         data-website-id={UMAMIId}
         src="https://cloud.umami.is/script.js"
     ></script>
+)}
+
+<!-- 百度统计 跟踪代码 -->
+{baiduId && (
+    <script is:inline define:vars={{ baiduId }}>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?" + baiduId;
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 )}
