@@ -115,6 +115,29 @@ const latestPosts = allPosts
         </div>
     </section>
 
+    {/* ── 访问统计 ── */}
+    <section class="section-stats">
+        <div class="container">
+            <div class="stats-card">
+                <div class="stats-card__label">访问统计</div>
+                <div class="stats-card__grid">
+                    <div class="stats-card__item">
+                        <span class="stats-card__value" id="vercount_value_site_pv">—</span>
+                        <span class="stats-card__name">总访问量</span>
+                    </div>
+                    <div class="stats-card__item">
+                        <span class="stats-card__value" id="vercount_value_site_uv">—</span>
+                        <span class="stats-card__name">访客数</span>
+                    </div>
+                    <div class="stats-card__item">
+                        <span class="stats-card__value" id="vercount_value_page_pv">—</span>
+                        <span class="stats-card__name">本页浏览</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </BaseLayout>
 
 <style lang="scss">
@@ -459,6 +482,67 @@ const latestPosts = allPosts
 /* ── Practice Section ── */
 .section-practice {
     padding: 24px 0 48px;
+}
+
+/* ── Visitor Stats ── */
+.section-stats {
+    padding: 0 0 48px;
+}
+.stats-card {
+    background: linear-gradient(135deg, var(--color-900), var(--color-999));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-large);
+    padding: 28px 32px;
+    text-align: center;
+    transition: border-color 0.3s ease;
+    &:hover {
+        border-color: var(--accent-regular);
+    }
+    &__label {
+        display: block;
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--color-400);
+        font-family: var(--font-type);
+        margin-bottom: 18px;
+    }
+    &__grid {
+        display: flex;
+        justify-content: center;
+        gap: 48px;
+        flex-wrap: wrap;
+    }
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+    }
+    &__value {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: var(--accent-regular);
+        font-family: var(--font-type);
+        line-height: 1.2;
+        min-width: 1.5em;
+    }
+    &__name {
+        font-size: 0.8rem;
+        color: var(--color-300);
+        letter-spacing: 0.5px;
+    }
+}
+@media (max-width: 480px) {
+    .stats-card {
+        padding: 20px 16px;
+        &__grid {
+            gap: 24px;
+        }
+        &__value {
+            font-size: 1.4rem;
+        }
+    }
 }
 
 /* ── Responsive ── */
