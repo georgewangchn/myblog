@@ -116,6 +116,25 @@ const latestPosts = allPosts
         </div>
     </section>
 
+    {/* ── 访问统计 ── */}
+    <section class="section-stats">
+        <div class="container">
+            <div class="stats-card">
+                <div class="stats-card__label">访问统计</div>
+                <div class="stats-card__grid">
+                    <div class="stats-card__item">
+                        <span class="stats-card__value" id="vercount_value_site_pv">—</span>
+                        <span class="stats-card__name">总访问量</span>
+                    </div>
+                    <div class="stats-card__item">
+                        <span class="stats-card__value" id="vercount_value_site_uv">—</span>
+                        <span class="stats-card__name">访客数</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </BaseLayout>
 
 <style lang="scss">
@@ -291,11 +310,6 @@ const latestPosts = allPosts
     }
 }
 
-/* ── Practice Section ── */
-.section-practice {
-    padding: 24px 0 48px;
-}
-
 /* ── Banner media specifics ── */
 .banner-media-book {
     width: 140px;
@@ -384,11 +398,6 @@ const latestPosts = allPosts
         margin: 0 auto;
         line-height: 1.6;
     }
-}
-
-/* ── Practice Section ── */
-.section-practice {
-    padding: 24px 0 48px;
 }
 
 /* ── Visitor Stats ── */
