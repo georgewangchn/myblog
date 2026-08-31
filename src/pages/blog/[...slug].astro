@@ -105,16 +105,14 @@ const articleData = {
 		padding-bottom: .5rem;
 		margin:1.25rem auto 2.5rem;
 		font-size: .8rem;
-		white-space: nowrap;
-		color:var(--color-500);
+		color:var(--color-300);
 	}
 	.post-line-views{
 		border-top: 1px dashed var(--color-700);
 		padding-top: .75rem;
 		margin: 1.5rem auto 0;
 		font-size: .8rem;
-		white-space: nowrap;
-		color:var(--color-500);
+		color:var(--color-300);
 	}
 	.post-line-views span span {
 		color: var(--accent-regular);
@@ -162,7 +160,8 @@ const articleData = {
 	.content {
 		position:relative;
 		color:var(--color-200);
-		margin:3rem 0;
+		margin:3rem auto;
+		max-width: 44rem;
 	}
 
 	.content > :global(* + *) {
@@ -175,10 +174,6 @@ const articleData = {
 	.content :global(h4),
 	.content :global(h5) {
 		margin: 1.75em 0 1em;
-		color:var(--color-100);
-	}
-	.content :global(h2){
-		font-size: 1.75rem;
 		color:var(--color-100);
 	}
 	.content :global(h3){

@@ -1,0 +1,103 @@
+---
+interface Props {
+	href: string;
+	target?: string;
+}
+const { href, target = '_self' } = Astro.props;
+---
+
+<a href={href} target={target} class="banner-card">
+	<div class="banner-card__media">
+		<slot name="media" />
+	</div>
+	<div class="banner-card__info">
+		<slot name="info" />
+	</div>
+	<span class="banner-card__cta">
+		<slot name="cta" />
+	</span>
+</a>
+
+<style lang="scss">
+	.banner-card {
+		display: flex;
+		gap: 32px;
+		align-items: center;
+		text-decoration: none;
+		color: var(--color-100);
+		background: linear-gradient(135deg, var(--color-900), var(--color-999));
+		border: 1px solid var(--border);
+		border-radius: var(--radius-large);
+		padding: 32px;
+		transition: all 0.3s ease;
+
+		&:hover {
+			border-color: var(--accent-regular);
+			box-shadow: var(--shadow-md);
+			.banner-card__cta {
+				color: var(--accent-regular);
+			}
+		}
+
+		&__media {
+			flex-shrink: 0;
+
+			:global(img) {
+				border-radius: var(--radius);
+				box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+				transition: transform 0.4s ease;
+			}
+		}
+
+		&__info {
+			flex: 1;
+
+			:global(.banner-tag) {
+				display: inline-block;
+				font-size: 12px;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				color: var(--accent-regular);
+				background: var(--color-featured);
+				padding: 4px 12px;
+				border-radius: 20px;
+				margin-bottom: 12px;
+				font-family: var(--font-type);
+			}
+			:global(.banner-title) {
+				font-size: 1.5rem;
+				font-weight: 600;
+				line-height: 1.4;
+				margin-bottom: 12px;
+				color: var(--color-100);
+			}
+			:global(.banner-desc) {
+				font-size: 0.875rem;
+				color: var(--color-300);
+				line-height: 1.7;
+				margin-bottom: 16px;
+			}
+		}
+
+		&__cta {
+			font-size: 0.9rem;
+			font-weight: 500;
+			color: var(--color-200);
+			transition: color 0.3s;
+		}
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+			text-align: center;
+			padding: 24px;
+
+			&__media {
+				:global(img) {
+					width: 100%;
+					max-width: 320px;
+					height: auto;
+				}
+			}
+		}
+	}
+</style>

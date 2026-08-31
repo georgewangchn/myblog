@@ -94,6 +94,7 @@
     --color-0: #1e2d23;
     --color-50: #2c3a31;
     --color-100: #3a4a3e;
+    --color-100-rgb: 58, 74, 62;
     --color-200: #5a6d5e;
     --color-300: #6b7d72;
     --color-400: #8a9a8e;
@@ -124,6 +125,11 @@
     --color-primary-lighter: #d5eee2;
     --color-primary-light: #3ca882;
     --color-primary-main: #1a6b4f;
+    /* 兼容别名：历史代码大量引用 --color-primary / --color-primary-rgb */
+    --color-primary: #1a6b4f;
+    --color-primary-rgb: 26, 107, 79;
+    --bg-1: var(--color-999);
+    --bg-secondary: var(--color-900);
     /* Stream/水蓝 #3d8ab5 — 副色 */
     --color-purple: #3d8ab5;
     --color-blue: #3d8ab5;
@@ -143,7 +149,7 @@
     --card-color-selected: rgba(26, 107, 79, 0.18);
 
     /* //width: */
-    --max-width: 90%;
+    --max-width: min(90%, 1440px);
     --size-top: 64px;
     --size-bottom: 64px;
 
@@ -199,7 +205,7 @@
 
     @media(max-width: 1440px) {
         --pad-inner: 108px;
-        --max-width: 90%;
+        --max-width: min(90%, 1440px);
     }
 
     @media(max-width: 1280px) {
@@ -229,6 +235,7 @@
     --color-0: #e8ede9;
     --color-50: #e8ede9;
     --color-100: #e8ede9;
+    --color-100-rgb: 232, 237, 233;
     --color-200: #c5d0c7;
     --color-300: #aab8ac;
     --color-400: #8a9a8e;
@@ -237,6 +244,7 @@
     --color-700: #3a4a3e;
     --color-800: #2c3a31;
     --color-900: #1e2d23;
+    --color-100-rgb: 232, 237, 233;
     --color-999-basis: 150, 8%, 10%;
     --color-999: #171c18;
     --color-999-rgb: 23, 28, 24;
@@ -267,14 +275,6 @@
         0px 7px 7px rgba(0,0,0,0.18), 0px 2px 4px rgba(0,0,0,0.2);
     --shadow-lg: 0px 62px 25px rgba(0,0,0,0.1), 0px 35px 21px rgba(0,0,0,0.15),
         0px 16px 16px rgba(0,0,0,0.2), 0px 4px 9px rgba(0,0,0,0.25);
-}
-
-.darkmode--activated {
-    /* dark mode */
-    --color-1: #f0f0f0;
-    --color-2: #e0e0e0;
-    --color-3: #a0a0a0;
-    --color-4: #808080;
 }
 
 /* Global variables */
@@ -508,6 +508,11 @@ body {
 	-------------------------------------------------------------------*/
 :focus {
     outline: 0;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent-regular);
+    outline-offset: 2px;
 }
 
 .block {
@@ -808,6 +813,11 @@ body {
 
     &:focus {
         outline: none
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--accent-regular);
+        outline-offset: 2px
     }
 
     &:hover {
