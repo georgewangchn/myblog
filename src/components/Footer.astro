@@ -1,52 +1,79 @@
 ---
-import { footerText } from '../data/content';
+import { footerText, nav, socialLinks } from '../data/content';
 ---
 
 <footer>
-	<div class="group">
-		<p>{footerText}</p>
+	<div class="footer-nav">
+		{nav.items?.map(item => (
+			<a href={item.href} target={item.target || '_self'}>{item.label}</a>
+		))}
 	</div>
 
+	<div class="footer-socials">
+		{socialLinks.map(link => (
+			<a href={link.url} target={link.url.startsWith('http') ? '_blank' : '_self'} aria-label={link.name} set:html={link.icon} />
+		))}
+	</div>
+
+	<p class="footer-copy">{footerText}</p>
 </footer>
 <style>
 	footer {
 		display: flex;
 		flex-direction: column;
-		gap: 3rem;
+		align-items: center;
+		gap: 1.25rem;
 		margin-top: 4rem;
-		padding: 3rem 2rem 3rem;
+		padding: 2.5rem 2rem 2.5rem;
 		text-align: center;
 		color: var(--color-300);
 		font-size: var(--text-sm);
+		border-top: 1px dashed var(--color-700);
 	}
 
 	footer a {
 		color: var(--color-300);
 		text-decoration: 1px solid underline transparent;
 		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
+		transition: color var(--theme-transition), text-decoration-color var(--theme-transition);
 	}
 
 	footer a:hover,
 	footer a:focus {
+		color: var(--accent-regular);
 		text-decoration-color: currentColor;
 	}
 
-	.group {
-		display: block;
-		width: 100%;
-		text-align: center;
-	}
-	.group p{
-		text-align: center;
-	}
-
-	.socials {
+	.footer-nav {
 		display: flex;
 		justify-content: center;
-		gap: 1rem;
+		gap: 1.75rem;
 		flex-wrap: wrap;
 	}
 
-</style>
+	.footer-socials {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+	}
 
+	.footer-socials a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		border: 1px solid var(--color-700);
+		border-radius: 50%;
+		transition: color var(--theme-transition), border-color var(--theme-transition);
+	}
+
+	.footer-socials a:hover {
+		color: var(--accent-regular);
+		border-color: var(--accent-regular);
+	}
+
+	.footer-copy {
+		color: var(--color-300);
+	}
+</style>
