@@ -51,3 +51,36 @@ if (!UMAMIId) {
 
 <!-- Vercount 访问量计数器（前端公开展示用） -->
 <script is:inline defer src="https://events.vercount.one/js"></script>
+
+<!-- AI 引荐来源追踪（GEO 效果观测）：命中 AI 对话/搜索域名时上报事件 -->
+<script is:inline>
+(function () {
+    var AI = [
+        'chatgpt.com', 'chat.openai.com', 'openai.com',
+        'perplexity.ai', 'claude.ai', 'anthropic.com',
+        'gemini.google.com', 'bard.google.com', 'copilot.microsoft.com',
+        'you.com', 'phind.com', 'poe.com', 'deepseek.com', 'chat.deepseek.com',
+        'doubao.com', 'yiyan.baidu.com', 'kimi.moonshot.cn', 'kimi.com',
+        'tongyi.aliyun.com', 'chatglm.cn', 'metaso.cn', 'grok.com', 'x.ai'
+    ];
+    try {
+        var ref = document.referrer || '';
+        if (!ref) return;
+        var host = new URL(ref).hostname.replace(/^www\./, '');
+        var hit = AI.some(function (d) {
+            return host === d || host.endsWith('.' + d) || ref.indexOf(d) !== -1;
+        });
+        if (!hit) return;
+        var payload = { event: 'ai_referral', ai_source: host, page_path: location.pathname };
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'ai_referral', { ai_source: host, page_path: location.pathname });
+        } else {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push(payload);
+        }
+        if (typeof window.umami === 'object' && typeof window.umami.track === 'function') {
+            window.umami.track('ai_referral', payload);
+        }
+    } catch (e) {}
+})();
+</script>

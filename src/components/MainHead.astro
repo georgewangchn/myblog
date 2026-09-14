@@ -9,6 +9,7 @@ interface Props {
 	description?: string | undefined;
 	keywords?: string | undefined;
 	image?: string | undefined;
+	imageAlt?: string | undefined;
 	type?: 'website' | 'article' | undefined;
 	person?: boolean | undefined;
 	articleData?: {
@@ -26,6 +27,7 @@ const {
 	description,
 	keywords,
 	image = '/og-image.png',
+	imageAlt,
 	type = 'website',
 	person = false,
 	articleData,
@@ -35,6 +37,7 @@ const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://senlinpubu
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageUrl = new URL(image, siteUrl).toString();
 const fullTitle = title ? `${title}` : siteName;
+const ogImageAlt = imageAlt || title || siteName;
 const sameAs = socialLinks.filter((s) => s.url.startsWith('http')).map((s) => s.url);
 const authorName = articleData?.author || authorInfo.name;
 ---
@@ -63,6 +66,7 @@ const authorName = articleData?.author || authorInfo.name;
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:alt" content={ogImageAlt} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:locale" content="zh_CN" />
@@ -87,6 +91,7 @@ const authorName = articleData?.author || authorInfo.name;
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImageUrl} />
+<meta name="twitter:image:alt" content={ogImageAlt} />
 
 {/* ── JSON-LD: WebSite ── */}
 {type === 'website' && (

@@ -1,21 +1,33 @@
 import rss from "@astrojs/rss";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
+import { experimental_AstroContainer as AstroContainer } from "astro/container";
+import mdxRenderer from "@astrojs/mdx/server.js";
 
 export async function GET(context) {
+  const container = await AstroContainer.create();
+  container.addServerRenderer({ renderer: mdxRenderer });
+
   const blog = await getCollection('blog');
-  const items = blog
-    .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-    .map((post) => {
-      const html = post.rendered?.html ?? post.body ?? post.data.description;
-      return {
-        title: post.data.title,
-        pubDate: post.data.publishDate,
-        description: post.data.description,
-        link: `/blog/${post.id}/`,
-        categories: post.data.tags,
-        customData: `<content:encoded><![CDATA[${html}]]></content:encoded>`,
-      };
+  const sorted = blog.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+  const items = [];
+  for (const post of sorted) {
+    let html = post.data.description;
+    try {
+      const { Content } = await render(post);
+      html = await container.renderToString(Content);
+    } catch (err) {
+      html = post.body ?? post.data.description;
+    }
+    items.push({
+      title: post.data.title,
+      pubDate: post.data.publishDate,
+      description: post.data.description,
+      link: `/blog/${post.id}/`,
+      categories: post.data.tags,
+      content: html,
     });
+  }
 
   return rss({
     title: '森林瀑布的博客',

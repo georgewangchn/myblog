@@ -28,7 +28,7 @@ const latestPosts = allPosts
                     {latestPosts.map((post) => (
                         <a href={`/blog/${post.id}/`} class="blog-feed-card__item">
                             <span class="blog-feed-card__title">{post.data.title}</span>
-                            <span class="blog-feed-card__date">{post.data.publishDate.toISOString().slice(5, 7)}-{post.data.publishDate.toISOString().slice(8, 10)}</span>
+                            <time class="blog-feed-card__date" datetime={post.data.publishDate.toISOString()}>{post.data.publishDate.toISOString().slice(5, 7)}-{post.data.publishDate.toISOString().slice(8, 10)}</time>
                         </a>
                     ))}
                 </div>

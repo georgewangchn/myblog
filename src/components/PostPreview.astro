@@ -18,7 +18,7 @@ const category = Astro.props['data-category'] || data.category || '技术';
 		</p>
 		<span class="publish-date">
 			<span class="post-category">{category}</span>
-			{data.publishDate.toISOString().split('T')[0]}
+			<time datetime={data.publishDate.toISOString()}>{data.publishDate.toISOString().split('T')[0]}</time>
 		</span>
 	</div>
 	<div class="post-icon">

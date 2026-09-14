@@ -9,6 +9,7 @@ interface Props {
 	keywords?: string | undefined;
 	description?: string | undefined;
 	image?: string | undefined;
+	imageAlt?: string | undefined;
 	person?: boolean | undefined;
 	articleData?: {
 		publishDate?: string;
@@ -18,11 +19,11 @@ interface Props {
 		section?: string;
 	} | undefined;
 }
-const { title, description, keywords, image, person, articleData } = Astro.props;
+const { title, description, keywords, image, imageAlt, person, articleData } = Astro.props;
 ---
 <html lang="zh-CN">
 	<head>
-		<MainHead title={title} description={description} keywords={keywords} image={image} person={person} type="article" articleData={articleData} />
+		<MainHead title={title} description={description} keywords={keywords} image={image} imageAlt={imageAlt} person={person} type="article" articleData={articleData} />
 	</head>
 	<body class="_body">
 		<div class="">
