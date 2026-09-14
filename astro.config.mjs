@@ -40,7 +40,6 @@ export default defineConfig({
     changefreq: 'weekly',
     customPages: [
       `${SITE_URL}/book/index.html`,
-      `${SITE_URL}/book/output/%E5%BD%93LLM%E4%B8%8D%E5%A4%9F%E7%94%A8%E4%BA%86.html`,
     ],
     serialize(item) {
       const path = new URL(item.url).pathname;
