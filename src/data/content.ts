@@ -5,6 +5,20 @@ export const siteConfig = {
     siteUrl: import.meta.env.PUBLIC_SITE_URL,
 }
 
+export const siteName = '森林瀑布的博客';
+
+// ── 作者实体（用于 Person 结构化数据 / GEO）──
+export const authorInfo = {
+    name: '森林瀑布',
+    alternateName: 'George Wang',
+    email: 'aigeorge@qq.com',
+    jobTitle: '知识图谱与本体推理实践者',
+    knowsAbout: [
+        '本体推理', '知识图谱', 'OWL', 'SWRL', 'HermiT', 'Prolog', 'Jena',
+        'SPARQL', '模糊逻辑', '大语言模型', 'Agent', '企业决策系统', 'Palantir',
+    ],
+};
+
 interface NavItem { label: string; href: string; target?: string }
 
 interface Nav { avatar?: string; items?: NavItem[] }

@@ -13,11 +13,14 @@ const blogCollection = defineCollection({
 		title: z.string(),
 		description: z.string(),
 		publishDate: z.coerce.date(),
+		updatedDate: z.coerce.date().optional(),
 		read: z.number().optional(),
 		tags: z.array(z.string()).optional(),
 		category: z.string().default('技术'),
 		img: z.string().optional(),
 		img_alt: z.string().optional(),
+		summary: z.string().optional(),
+		faq: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
 	}),
 });
 

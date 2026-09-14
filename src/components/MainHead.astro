@@ -1,5 +1,6 @@
 ---
 import Analytics from '../components/functions/Analytics.astro';
+import { socialLinks, authorInfo, siteName } from '../data/content';
 import '../styles/layout.scss';
 import '../styles/global.scss';
 
@@ -9,11 +10,14 @@ interface Props {
 	keywords?: string | undefined;
 	image?: string | undefined;
 	type?: 'website' | 'article' | undefined;
+	person?: boolean | undefined;
 	articleData?: {
 		publishDate?: string;
 		modifiedDate?: string;
 		author?: string;
 		tags?: string[];
+		section?: string;
+		faq?: { q: string; a: string }[];
 	} | undefined;
 }
 
@@ -23,14 +27,16 @@ const {
 	keywords,
 	image = '/og-image.png',
 	type = 'website',
+	person = false,
 	articleData,
 } = Astro.props;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://senlinpubu.top';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageUrl = new URL(image, siteUrl).toString();
-const siteName = '森林瀑布的博客';
 const fullTitle = title ? `${title}` : siteName;
+const sameAs = socialLinks.filter((s) => s.url.startsWith('http')).map((s) => s.url);
+const authorName = articleData?.author || authorInfo.name;
 ---
 
 <meta charset="UTF-8" />
@@ -43,14 +49,15 @@ const fullTitle = title ? `${title}` : siteName;
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="generator" content={Astro.generator} />
-<meta name="author" content="森林瀑布" />
+<meta name="author" content={authorInfo.name} />
 <meta name="baidu-site-verification" content="codeva-LSnHZRk2TW" />
 <meta name="bytedance-verification-code" content="Q4WDJOIrszITWeHPvbGW" />
 <title>{fullTitle}</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
 
 {/* ── Open Graph ── */}
-<meta property="og:type" content={type} />
+<meta property="og:type" content={person ? 'profile' : type} />
 <meta property="og:site_name" content={siteName} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
@@ -67,6 +74,9 @@ const fullTitle = title ? `${title}` : siteName;
 )}
 {type === 'article' && articleData?.author && (
 	<meta property="article:author" content={articleData.author} />
+)}
+{type === 'article' && articleData?.section && (
+	<meta property="article:section" content={articleData.section} />
 )}
 {type === 'article' && articleData?.tags?.map(tag => (
 	<meta property="article:tag" content={tag} />
@@ -86,16 +96,33 @@ const fullTitle = title ? `${title}` : siteName;
 		"name": siteName,
 		"url": siteUrl,
 		"description": description,
-		"potentialAction": {
-			"@type": "SearchAction",
-			"target": `${siteUrl}/blog?q={search_term_string}`,
-			"query-input": "required name=search_term_string"
+		"inLanguage": "zh-CN",
+		"publisher": {
+			"@type": "Person",
+			"name": authorInfo.name,
+			"url": siteUrl + "/about/"
 		}
 	})} />
 )}
 
+{/* ── JSON-LD: Person（关于页）── */}
+{type === 'article' && person && (
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "Person",
+		"name": authorInfo.name,
+		"alternateName": authorInfo.alternateName,
+		"url": canonicalUrl,
+		"description": description,
+		"jobTitle": authorInfo.jobTitle,
+		"email": `mailto:${authorInfo.email}`,
+		"sameAs": sameAs,
+		"knowsAbout": authorInfo.knowsAbout
+	})} />
+)}
+
 {/* ── JSON-LD: BlogPosting ── */}
-{type === 'article' && (
+{type === 'article' && !person && (
 	<script type="application/ld+json" set:html={JSON.stringify({
 		"@context": "https://schema.org",
 		"@type": "BlogPosting",
@@ -105,26 +132,51 @@ const fullTitle = title ? `${title}` : siteName;
 		"url": canonicalUrl,
 		"datePublished": articleData?.publishDate,
 		"dateModified": articleData?.modifiedDate || articleData?.publishDate,
+		"inLanguage": "zh-CN",
+		"articleSection": articleData?.section,
 		"author": {
 			"@type": "Person",
-			"name": articleData?.author || "森林瀑布",
-			"url": siteUrl + "/about/"
+			"name": authorName,
+			"url": siteUrl + "/about/",
+			"sameAs": sameAs
 		},
 		"publisher": {
 			"@type": "Person",
-			"name": "森林瀑布",
+			"name": authorInfo.name,
 			"url": siteUrl
 		},
 		"mainEntityOfPage": {
 			"@type": "WebPage",
 			"@id": canonicalUrl
 		},
+		"isPartOf": {
+			"@type": "Blog",
+			"name": siteName,
+			"url": siteUrl + "/blog/"
+		},
+		"about": (articleData?.tags || []).map(tag => ({ "@type": "Thing", "name": tag })),
 		"keywords": (articleData?.tags || []).join(", ")
 	})} />
 )}
 
+{/* ── JSON-LD: FAQPage ── */}
+{type === 'article' && !person && articleData?.faq && articleData.faq.length > 0 && (
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		"mainEntity": articleData.faq.map(({ q, a }) => ({
+			"@type": "Question",
+			"name": q,
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": a
+			}
+		}))
+	})} />
+)}
+
 {/* ── JSON-LD: BreadcrumbList for articles ── */}
-{type === 'article' && (
+{type === 'article' && !person && (
 	<script type="application/ld+json" set:html={JSON.stringify({
 		"@context": "https://schema.org",
 		"@type": "BreadcrumbList",

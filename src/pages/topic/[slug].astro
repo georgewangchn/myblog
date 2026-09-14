@@ -1,0 +1,134 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostPreview from '../../components/PostPreview.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import { topics, matchTopics } from '../../data/topics';
+
+export async function getStaticPaths() {
+	const blog = await getCollection('blog');
+	return topics.map((topic) => ({
+		params: { slug: topic.slug },
+		props: {
+			topic,
+			posts: blog
+				.filter((p) =>
+					matchTopics({ id: p.id, tags: p.data.tags, category: p.data.category }).some(
+						(m) => m.slug === topic.slug,
+					),
+				)
+				.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()),
+		},
+	}));
+}
+
+const { topic, posts } = Astro.props;
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://senlinpubu.top';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const itemList = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	'@id': canonicalUrl,
+	name: topic.title,
+	description: topic.description,
+	inLanguage: 'zh-CN',
+	url: canonicalUrl,
+	mainEntity: {
+		'@type': 'ItemList',
+		numberOfItems: posts.length,
+		itemListElement: posts.map((p, i) => ({
+			'@type': 'ListItem',
+			position: i + 1,
+			url: `${siteUrl}/blog/${p.id}/`,
+			name: p.data.title,
+		})),
+	},
+};
+---
+
+<BaseLayout title={`${topic.title} — 森林瀑布`} description={topic.description} keywords={topic.keywords}>
+	<div class="post">
+		<main class="post-wrapper">
+			<SectionHeader tag="TOPIC" description={topic.description}>
+				{topic.title}
+			</SectionHeader>
+
+			<section class="topic-intro">
+				<p>{topic.intro}</p>
+				<ul class="topic-highlights">
+					{topic.highlights.map((h) => <li>{h}</li>)}
+				</ul>
+			</section>
+
+			<section class="border-top">
+				<div class="posts">
+					<div class="posts-container">
+						{posts.map((post) => (
+							<PostPreview post={post} data-category={post.data.category || '技术'} />
+						))}
+					</div>
+				</div>
+			</section>
+
+			<div class="post-back">
+				<a href="/blog/">← 返回博客列表</a>
+			</div>
+		</main>
+	</div>
+
+	<script type="application/ld+json" set:html={JSON.stringify(itemList)} />
+</BaseLayout>
+
+<style>
+	.post {
+		display: block;
+		max-width: 1020px;
+		width: 100%;
+		margin: 0 auto;
+	}
+	.topic-intro {
+		max-width: 44rem;
+		margin: 0 auto 2rem;
+		color: var(--color-200);
+	}
+	.topic-intro p {
+		line-height: 1.8;
+		margin-bottom: 1rem;
+	}
+	.topic-highlights {
+		list-style: none;
+		padding: 0;
+		margin: 1.5rem 0 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+	.topic-highlights li {
+		position: relative;
+		padding-left: 1.5rem;
+		font-size: 0.9rem;
+		color: var(--color-300);
+		line-height: 1.7;
+	}
+	.topic-highlights li::before {
+		content: '→';
+		position: absolute;
+		left: 0;
+		color: var(--accent-regular);
+	}
+	.posts {
+		margin-top: 24px;
+	}
+	.post-back {
+		text-align: center;
+		margin: 2rem auto 3rem;
+	}
+	.post-back a {
+		font-size: 0.85rem;
+		color: var(--color-300);
+		text-decoration: none;
+	}
+	.post-back a:hover {
+		color: var(--accent-regular);
+	}
+</style>

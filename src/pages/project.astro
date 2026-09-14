@@ -3,7 +3,32 @@ import BlogPostLayout from "../layouts/BlogPostLayout.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import ProjectList from '../components/ProjectList.astro';
 import {pageTag, pageDescription,projectTdk} from '../data/content';
+import { projectItems } from '../data/project';
 
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://senlinpubu.top';
+const softwareList = {
+	'@context': 'https://schema.org',
+	'@type': 'ItemList',
+	name: '开源项目 — 森林瀑布',
+	itemListElement: projectItems.map((p, i) => ({
+		'@type': 'ListItem',
+		position: i + 1,
+		item: {
+			'@type': 'SoftwareSourceCode',
+			name: p.title,
+			alternateName: p.title_en,
+			description: p.description,
+			url: p.url,
+			codeRepository: p.url && p.url.startsWith('https://github.com') ? p.url : undefined,
+			keywords: (p.tags || []).join(', '),
+			author: {
+				'@type': 'Person',
+				name: '森林瀑布',
+				url: `${siteUrl}/about/`,
+			},
+		},
+	})),
+};
 ---
 
 <BlogPostLayout
@@ -27,6 +52,8 @@ import {pageTag, pageDescription,projectTdk} from '../data/content';
 			</section>
 		</main>
 	</div>
+
+	<script type="application/ld+json" set:html={JSON.stringify(softwareList)} />
 </BlogPostLayout>
 
 

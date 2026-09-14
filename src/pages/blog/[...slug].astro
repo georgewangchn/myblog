@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
+import { matchTopics } from "../../data/topics";
 interface Props {
 	entry: CollectionEntry<'blog'>;
 	prev?: CollectionEntry<'blog'> | null;
@@ -29,9 +30,13 @@ const { Content, headings } = await render(entry);
 const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
 const articleData = {
 	publishDate: entry.data.publishDate.toISOString(),
+	modifiedDate: (entry.data.updatedDate ?? entry.data.publishDate).toISOString(),
 	author: '森林瀑布',
 	tags: entry.data.tags,
+	section: entry.data.category,
+	faq: entry.data.faq,
 };
+const relatedTopics = matchTopics({ id: entry.id, tags: entry.data.tags, category: entry.data.category });
 ---
 
 <BlogPostLayout
@@ -57,7 +62,7 @@ const articleData = {
 
 				</div>
 				<div class="post-line post-line-bottom text-center" >
-					<span class="text-center">更新于：{entry.data.publishDate.toISOString().slice(0,10)}</span>
+					<span class="text-center">更新于：{(entry.data.updatedDate ?? entry.data.publishDate).toISOString().slice(0,10)}</span>
 					{
 						entry.data.read &&   <span class="" >•</span>
 					<span >{entry.data.read} min read</span>
@@ -74,12 +79,45 @@ const articleData = {
 				}
 			</div>
 
+			{
+				(entry.data.summary || entry.data.description) && (
+					<div class="post-summary">
+						<span class="post-summary__label">一句话总结</span>
+						<p>{entry.data.summary ?? entry.data.description}</p>
+					</div>
+				)
+			}
 
 			<section>
 				<div class="content">
 					<Content />
 				</div>
 			</section>
+
+			{
+				entry.data.faq && entry.data.faq.length > 0 && (
+					<section class="post-faq">
+						<h2>常见问题（FAQ）</h2>
+						{entry.data.faq.map(({ q, a }) => (
+							<details class="post-faq__item">
+								<summary>{q}</summary>
+								<p>{a}</p>
+							</details>
+						))}
+					</section>
+				)
+			}
+
+			{
+				relatedTopics.length > 0 && (
+					<div class="post-topics">
+						<span class="post-topics__label">相关主题</span>
+						{relatedTopics.map((t) => (
+							<a href={`/topic/${t.slug}/`}>{t.title}</a>
+						))}
+					</div>
+				)
+			}
 
 			<div class="post-line post-line-views text-center">
 				<span>本文阅读量 <span id="vercount_value_page_pv">—</span> 次</span>
@@ -288,6 +326,86 @@ const articleData = {
 	border-radius:36px;
 	color:var(--color-300);
 	font-family:var(--font-type);
+}
+
+/* ── Answer-first summary ── */
+.post-summary{
+	max-width:44rem;
+	margin:0 auto 2rem;
+	padding:1.25rem 1.5rem;
+	border:1px solid var(--color-700);
+	border-left:3px solid var(--accent-regular);
+	border-radius:var(--radius-large);
+	background:var(--color-900);
+}
+.post-summary__label{
+	display:block;
+	font-size:0.7rem;
+	letter-spacing:1.5px;
+	text-transform:uppercase;
+	color:var(--accent-regular);
+	font-family:var(--font-type);
+	margin-bottom:0.5rem;
+}
+.post-summary p{
+	margin:0;
+	font-size:0.95rem;
+	line-height:1.8;
+	color:var(--color-200);
+}
+
+/* ── FAQ ── */
+.post-faq{
+	max-width:44rem;
+	margin:2.5rem auto 0;
+}
+.post-faq h2{
+	font-size:1.4rem;
+	color:var(--color-100);
+	margin-bottom:1rem;
+}
+.post-faq__item{
+	border:1px solid var(--color-700);
+	border-radius:var(--radius-large);
+	padding:0.75rem 1.25rem;
+	margin-bottom:0.75rem;
+}
+.post-faq__item summary{
+	cursor:pointer;
+	font-weight:600;
+	color:var(--color-100);
+}
+.post-faq__item p{
+	margin:0.75rem 0 0;
+	line-height:1.8;
+	color:var(--color-200);
+}
+
+/* ── Related topics ── */
+.post-topics{
+	max-width:44rem;
+	margin:2rem auto 0;
+	display:flex;
+	flex-wrap:wrap;
+	align-items:center;
+	gap:0.5rem;
+}
+.post-topics__label{
+	font-size:0.75rem;
+	color:var(--color-400);
+	font-family:var(--font-type);
+}
+.post-topics a{
+	font-size:0.8rem;
+	padding:5px 12px 4px;
+	border:1px solid var(--color-700);
+	border-radius:36px;
+	color:var(--color-300);
+	text-decoration:none;
+}
+.post-topics a:hover{
+	border-color:var(--accent-regular);
+	color:var(--accent-regular);
 }
 
 /* ── Prev / Next ── */
