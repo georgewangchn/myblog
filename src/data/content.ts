@@ -86,7 +86,7 @@ export const socialLinks = [
 	},
 	{
 	  name: 'Zhihu',
-	  url: 'https://www.zhihu.com/people/senlinpubu',
+	  url: 'https://www.zhihu.com/people/dschain.george',
 	  icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.325 17.32h-2.65v-2.66h2.65v2.66zM8.9 6.84h4.425v1.62H8.9v-1.62zm5.77 1.62h-1.35V6.84h1.35v1.62zM13.3 13.3h-2.65v-2.66h2.65v2.66zm-4.4 0H6.25v-2.66H8.9v2.66zm5.75 0h-1.35v-2.66h1.35v2.66zm-4.4 4.02H7.6v-2.66h2.65v2.66zm5.75 0h-1.35v-2.66h1.35v2.66zM13.3 9.18h-2.65V6.52h2.65v2.66zM5.42 12c0-5.51 4.47-10 9.98-10 5.52 0 10 4.49 10 10s-4.48 10-10 10c-5.51 0-9.98-4.49-9.98-10z"/></svg>`
 	},
 	{

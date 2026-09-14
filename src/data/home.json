@@ -1,7 +1,7 @@
 [
 	{
 		"id": "palantir1",
-		"cover": "/assets/cover/cover-agent.svg",
+		"cover": "/assets/cover/palantir-ontology-grew.png",
 		"title": "上篇：Palantir还是太全面了",
 		"desc": "扒完 Palantir 官网和文档：它真正难复制的不是某个产品，而是从数据到语义、到行动、再回到业务数据的完整闭环。",
 		"url": "/blog/palantir-comprehensive/",
@@ -20,19 +20,19 @@
 		"detail": "/blog/palantir-ontology-grew/",
 		"category": "agent",
 		"tag": "Palantir",
-		"date": "2026-08-27",
+		"date": "2026-08-28",
 		"mark": true
 	},
 	{
 		"id": "palantir3",
-		"cover": "/assets/cover/cover-agent.svg",
+		"cover": "/assets/cover/palantir-ontology-grew.png",
 		"title": "下篇：Palantir教我们怎么用AI",
 		"desc": "看 Palantir 三年，企业用 AI 最该做的不是向外追模型、追 RAG，而是向内审自己的业务：砍掉多余流程，收回失控的权力。",
 		"url": "/blog/palantir-ai-inward/",
 		"detail": "/blog/palantir-ai-inward/",
 		"category": "agent",
 		"tag": "Palantir",
-		"date": "2026-09-14",
+		"date": "2026-09-29",
 		"mark": true
 	},
 	{
