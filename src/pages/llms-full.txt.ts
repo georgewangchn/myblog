@@ -1,6 +1,39 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { authorInfo, siteName } from '../data/content';
+
+function htmlToText(html: string): string {
+  return html
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<\/(p|div|h[1-6]|li|tr|blockquote|section)>/gi, '\n')
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&#(\d+);/g, (_, d) => String.fromCharCode(Number(d)))
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
+function readBookText(): string | null {
+  try {
+    const file = resolve(process.cwd(), 'public/book/output/当LLM不够用了.html');
+    const html = readFileSync(file, 'utf8');
+    const start = html.indexOf('<div class="chapter-start">');
+    const body = start >= 0 ? html.slice(start) : html;
+    return htmlToText(body);
+  } catch {
+    return null;
+  }
+}
 
 export const GET: APIRoute = async ({ site }) => {
   const siteUrl = site?.toString().replace(/\/$/, '') || 'https://senlinpubu.top';
@@ -36,6 +69,19 @@ export const GET: APIRoute = async ({ site }) => {
       post.body ?? post.data.description,
       '',
       '---',
+      '',
+    );
+  }
+
+  const bookText = readBookText();
+  if (bookText) {
+    parts.push(
+      '## 书籍全文：《当LLM不够用了——本体推理的企业决策实践》',
+      '',
+      `- 在线阅读: ${siteUrl}/book/index.html`,
+      `- 下载: ${siteUrl}/book/output/当LLM不够用了.pdf · .epub · .html`,
+      '',
+      bookText,
       '',
     );
   }

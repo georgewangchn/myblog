@@ -5,6 +5,14 @@ publishDate: 2026-07-02
 read: 25
 tags: ["Agent", "LLM", "LangGraph", "本体推理", "OWL"]
 category: "技术"
+summary: "PL1 把 P1 的 OWL/HermiT 引擎用 LangGraph Agent 包装，用户用自然语言描述症状，Agent 自动查本体、收集信息、触发推理并解释结果。"
+faq:
+  - q: "PL1 解决了什么问题？"
+    a: "P1 的推理能力很强，但用户不会写 OWL。PL1 用 LLM Agent 把自然语言转换成对 P1 引擎的调用。"
+  - q: "Agent 是怎么调用推理引擎的？"
+    a: "通过工具注入：查症状、查疾病定义、写入观察、触发 HermiT 推理、解释推理依据等七个工具。"
+  - q: "PL1 里 LLM 负责什么？"
+    a: "LLM 负责理解与编排（收集信息、选工具、解释结果），真正的决策仍由 HermiT 推理机给出。"
 ---
 
 > 多范式推理实战营 · PL 系列 1/5

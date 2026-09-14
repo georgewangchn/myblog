@@ -5,6 +5,14 @@ publishDate: 2026-07-06
 read: 25
 tags: ["Agent", "LLM", "LangGraph", "SPARQL", "RDF", "Jena"]
 category: "技术"
+summary: "PL3 用 LangGraph Agent 包装 P3 的 Jena 前向链 + SPARQL 引擎，Agent 可查 RDF 知识库、触发推理并查询传递闭包。"
+faq:
+  - q: "PL3 怎么处理推理时机？"
+    a: "区分预计算与实时计算：传递闭包等可预计算，具体查询按需实时执行。"
+  - q: "OWA 如何影响 Agent 行为？"
+    a: "开放世界假设下，信息不足时 Agent 应继续追问而不是草率否定，这直接塑造了 PL3 的追问策略。"
+  - q: "SPARQL 在 PL3 里扮演什么角色？"
+    a: "SPARQL 既做查询也参与推理，实现查询与推理一体化。"
 ---
 
 > 多范式推理实战营 · PL 系列 3/5

@@ -5,6 +5,14 @@ publishDate: 2026-07-07
 read: 25
 tags: ["Agent", "LLM", "LangGraph", "模糊推理", "Mamdani", "scikit-fuzzy"]
 category: "技术"
+summary: "PL4 用 Agent 包装 P4 的 Mamdani 模糊引擎，会主动追问症状严重度（体温值、呕吐频率等），输出连续置信度。"
+faq:
+  - q: "PL4 的独特挑战是什么？"
+    a: "模糊推理需要严重度信息，Agent 必须主动追问「有多严重」，这是 PL1–PL3 的二元症状不需要的。"
+  - q: "get_symptom_severity 有什么作用？"
+    a: "这是 PL4 独有工具，用来获取体温值、呕吐频率、腹泻类型等连续量，供模糊推理使用。"
+  - q: "为什么 PL4 输出置信度而不是「是/否」？"
+    a: "模糊推理的去模糊化结果本身是连续置信度，比二元结论更贴近真实病情。"
 ---
 
 > 多范式推理实战营 · PL 系列 4/5

@@ -5,23 +5,35 @@ import mdx from '@astrojs/mdx';
 import { readdirSync, readFileSync } from 'node:fs';
 
 const SITE_URL = (process.env.PUBLIC_SITE_URL || 'https://senlinpubu.top').replace(/\/$/, '');
+const abs = (p) => (/^https?:\/\//.test(p) ? p : `${SITE_URL}${p.startsWith('/') ? '' : '/'}${p}`);
 
-// 构建时读取每篇文章的 publishDate，供 sitemap 设置真实 lastmod
-function getPostDates() {
+// 构建时读取每篇文章的 publishDate / 封面 / 标题，供 sitemap 设置真实 lastmod 与图片
+function getPostMeta() {
   const dir = new URL('./src/content/blog/', import.meta.url);
   const map = new Map();
   for (const file of readdirSync(dir)) {
     if (!/\.(md|mdx)$/i.test(file)) continue;
     const src = readFileSync(new URL(file, dir), 'utf8');
-    const match = src.match(/publishDate:\s*["']?(\d{4}-\d{2}-\d{2})/);
-    if (!match) continue;
+    const dateMatch = src.match(/publishDate:\s*["']?(\d{4}-\d{2}-\d{2})/);
+    if (!dateMatch) continue;
+    const imgMatch = src.match(/^img:\s*(.+)$/m);
+    const titleMatch = src.match(/^title:\s*(.+)$/m);
+    const clean = (v) => (v ? v.trim().replace(/^['"]|['"]$/g, '') : undefined);
     const slug = file.replace(/\/index\.(md|mdx)$/i, '').replace(/\.(md|mdx)$/i, '');
-    map.set(`/blog/${slug}/`, new Date(match[1]));
+    map.set(`/blog/${slug}/`, {
+      date: new Date(dateMatch[1]),
+      img: clean(imgMatch && imgMatch[1]),
+      title: clean(titleMatch && titleMatch[1]),
+    });
   }
   return map;
 }
 
-const postDates = getPostDates();
+const postMeta = getPostMeta();
+const withImg = (item, imgs) => {
+  const list = imgs.filter(Boolean).map((url) => ({ url }));
+  return list.length ? { ...item, img: list } : item;
+};
 
 export default defineConfig({
   devToolbar: {
@@ -44,10 +56,18 @@ export default defineConfig({
     serialize(item) {
       const path = new URL(item.url).pathname;
       if (path === '/') {
-        return { ...item, changefreq: 'weekly', priority: 1.0 };
+        return withImg({ ...item, changefreq: 'weekly', priority: 1.0 }, [
+          `${SITE_URL}/assets/cover/book-cover.png`,
+          `${SITE_URL}/assets/cover/governanceops-demo.png`,
+        ]);
       }
       if (path.startsWith('/blog/') && path !== '/blog/') {
-        return { ...item, lastmod: postDates.get(path) ?? item.lastmod, changefreq: 'monthly', priority: 0.8 };
+        const meta = postMeta.get(path);
+        const out = { ...item, lastmod: meta?.date ?? item.lastmod, changefreq: 'monthly', priority: 0.8 };
+        return meta?.img ? withImg(out, [abs(meta.img)]) : out;
+      }
+      if (path === '/book/index.html') {
+        return withImg({ ...item, changefreq: 'monthly', priority: 0.7 }, [`${SITE_URL}/assets/cover/book-cover.png`]);
       }
       if (['/blog/', '/project/', '/about/'].includes(path)) {
         return { ...item, changefreq: 'weekly', priority: 0.7 };
