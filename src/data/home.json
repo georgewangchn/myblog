@@ -48,6 +48,18 @@
 		"mark": true
 	},
 	{
+		"id": "ousheng2",
+		"cover": "/assets/cover/cover-opensource.svg",
+		"title": "OuSheng · 多人多系统 AI Coding 敏捷看板",
+		"desc": "AI 写代码飞快，协作反而更乱。把需求、契约、证据、方案全放进一个 git 仓，每台机器开工前先读它，人只负责拍板与看板。",
+		"url": "/blog/ousheng-agile-kanban/",
+		"detail": "/blog/ousheng-agile-kanban/",
+		"category": "agent",
+		"tag": "OuSheng",
+		"date": "2026-09-14",
+		"mark": true
+	},
+	{
 		"id": "p1",
 		"cover": "/assets/cover/cover-owl.svg",
 		"title": "P1 · OWL / HermiT 本体推理",
