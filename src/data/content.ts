@@ -66,8 +66,8 @@ export const seriesTdk: SeoTdk = {
 
 export const projectTdk: SeoTdk = {
 	title: '开源项目 — 森林瀑布',
-	description: 'GovernanceOps 企业治理运维 + OntologyOps 本体即代码 — 两个基于本体推理的开源项目。',
-	keywords: '本体推理,GovernanceOps,OntologyOps,开源,OWL,企业治理',
+	description: 'MOSS 企业治理运维 + OntologyOps 本体即代码 — 两个基于本体推理的开源项目。',
+	keywords: '本体推理,MOSS,GovernanceOps,OntologyOps,开源,OWL,企业治理',
 }
 
 export const notFoundTdk: SeoTdk = {
@@ -111,7 +111,7 @@ export const pageTag: PageTag = {
 interface PageDescription { index?: string; project?: string; blog?: string; about?: string }
 export const pageDescription: PageDescription = {
 	index: '「当LLM不够用了」系列作者。专注知识图谱、本体推理、LLM 与企业决策系统的融合落地。',
-	project: '两个基于本体推理的开源项目 — GovernanceOps · OntologyOps',
+	project: '两个基于本体推理的开源项目 — MOSS · OntologyOps',
 	about: '知识图谱与本体推理领域实践者',
 	blog: '记录我在本体推理、知识工程与 AI 探索过程中的思考和笔记。',
 }

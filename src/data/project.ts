@@ -11,12 +11,12 @@ export interface ProjectItem {
 }
 export const projectItems: ProjectItem[] = [
 	{
-		title: "GovernanceOps",
-		title_en: "Ontology-Driven Governance Operations",
-		description: "用本体推理替代人工流转，让企业决策可验证、可追踪、可审计。OWL + SWRL + HermiT 推理引擎驱动。",
+		title: "MOSS",
+		title_en: "MOSS · 曾用名 GovernanceOps",
+		description: "MOSS（曾用名：GovernanceOps）——用本体推理替代人工流转，让企业决策可验证、可追踪、可审计。OWL + SWRL + HermiT 推理引擎驱动。",
 		date: "2025-05-01",
 		detail: "/demo/index.html",
-		url: "/demo/index.html",
+		url: "https://github.com/georgewangchn/MOSS",
 		tags: ['OWL', '推理引擎', '企业治理']
 	},
 	{
