@@ -24,7 +24,7 @@ export const GET: APIRoute = async ({ site }) => {
     '',
     '## 专栏',
     '',
-    `- [《当LLM不够用了——本体推理的企业决策实践》](${siteUrl}/book/index.html): 从 OWL 公理体系、SWRL 规则到 HermiT 推理引擎，从理论到 12 章完整实战。`,
+    `- [《当LLM不够用了——本体推理的企业决策实践》](${siteUrl}/book/index.html): 从 OWL 公理体系、SWRL 规则到 HermiT 推理引擎，从理论到 9 章 + 附录完整实战。`,
     `- [MOSS 演示（曾用名：GovernanceOps）](${siteUrl}/demo/index.html): 用本体推理替代人工流转的企业治理运维演示。`,
     '',
     '## 主题',
