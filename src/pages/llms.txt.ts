@@ -13,7 +13,7 @@ export const GET: APIRoute = async ({ site }) => {
   const lines: string[] = [
     `# ${siteName}`,
     '',
-    `> 《当LLM不够用了——本体推理的企业决策实践》作者。专注知识图谱、本体推理、LLM 与企业决策系统的融合落地。作者：${authorInfo.name}。`,
+    `> 《当LLM不够用了》作者。专注知识图谱、本体推理、LLM 与企业决策系统的融合落地。作者：${authorInfo.name}。`,
     '',
     `- 站点主页: ${siteUrl}/`,
     `- 专栏（书·在线阅读）: ${siteUrl}/book/index.html`,
@@ -24,7 +24,7 @@ export const GET: APIRoute = async ({ site }) => {
     '',
     '## 专栏',
     '',
-    `- [《当LLM不够用了——本体推理的企业决策实践》](${siteUrl}/book/index.html): 从 OWL 公理体系、SWRL 规则到 HermiT 推理引擎，从理论到 9 章 + 附录完整实战。`,
+    `- [《当LLM不够用了》](${siteUrl}/book/index.html): 从 OWL 公理体系、SWRL 规则到 HermiT 推理引擎，从理论到 9 章 + 附录完整实战。`,
     `- [MOSS 演示（曾用名：GovernanceOps）](${siteUrl}/demo/index.html): 用本体推理替代人工流转的企业治理运维演示。`,
     '',
     '## 主题',

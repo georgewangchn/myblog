@@ -45,7 +45,7 @@ export const GET: APIRoute = async ({ site }) => {
   const parts: string[] = [
     `# ${siteName} — 全文语料`,
     '',
-    `> 《当LLM不够用了——本体推理的企业决策实践》作者。专注知识图谱、本体推理、LLM 与企业决策系统的融合落地。作者：${authorInfo.name}。`,
+    `> 《当LLM不够用了》作者。专注知识图谱、本体推理、LLM 与企业决策系统的融合落地。作者：${authorInfo.name}。`,
     '',
     `站点: ${siteUrl}/`,
     `专栏: ${siteUrl}/book/index.html`,
@@ -76,7 +76,7 @@ export const GET: APIRoute = async ({ site }) => {
   const bookText = readBookText();
   if (bookText) {
     parts.push(
-      '## 书籍全文：《当LLM不够用了——本体推理的企业决策实践》',
+      '## 书籍全文：《当LLM不够用了》',
       '',
       `- 在线阅读: ${siteUrl}/book/index.html`,
       `- 下载: ${siteUrl}/book/output/当LLM不够用了.pdf · .epub · .html`,

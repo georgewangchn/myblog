@@ -31,7 +31,7 @@ export async function GET(context) {
 
   return rss({
     title: '森林瀑布的博客',
-    description: '《当LLM不够用了——本体推理的企业决策实践》作者。专注知识图谱、本体推理、LLM 与企业决策系统的融合落地。',
+    description: '《当LLM不够用了》作者。专注知识图谱、本体推理、LLM 与企业决策系统的融合落地。',
     site: context.site,
     stylesheet: '/rss/pretty-feed-v3.xsl',
     xmlns: { content: 'http://purl.org/rss/1.0/modules/content/' },

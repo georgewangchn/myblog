@@ -244,7 +244,7 @@ def generate_html(chapters_html, toc_items):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>当LLM不够用了——本体推理的企业决策实践</title>
+    <title>当LLM不够用了</title>
     <style>
         * {{
             margin: 0;
@@ -612,7 +612,7 @@ def generate_html(chapters_html, toc_items):
     
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h1>当LLM不够用了<br>——本体推理的企业决策实践</h1>
+            <h1>当LLM不够用了</h1>
             <div class="author">作者：森林瀑布</div>
             <a class="github-link" href="https://github.com/georgewangchn/OntologyOps" target="_blank">📖 GitHub: georgewangchn/OntologyOps</a>
         </div>

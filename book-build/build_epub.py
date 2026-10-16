@@ -15,7 +15,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 # === 书籍元数据 ===
-BOOK_TITLE = "当LLM不够用了——本体推理的企业决策实践"
+BOOK_TITLE = "当LLM不够用了"
 BOOK_AUTHOR = "森林瀑布"
 BOOK_LANGUAGE = "zh-CN"
 BOOK_DESC = (
@@ -460,7 +460,6 @@ def gen_cover_xhtml():
         + '\n    <rect width="600" height="800" fill="url(#bg)"/>'
         + '\n    <rect x="80" y="70" width="440" height="8" fill="url(#accent)" rx="4"/>'
         + '\n    <text x="300" y="260" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="36" font-weight="700" fill="white">当LLM不够用了</text>'
-        + '\n    <text x="300" y="340" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="28" font-weight="600" fill="#e0e0e0">本体推理的企业决策实践</text>'
         + '\n    <rect x="120" y="400" width="360" height="1" fill="#533483" opacity="0.6"/>'
         + '\n    <text x="300" y="480" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" fill="#888">森林瀑布 · 著</text>'
         + '\n    <text x="300" y="530" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#666">OntologyOps 工程范式</text>'

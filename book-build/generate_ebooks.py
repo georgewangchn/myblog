@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 # === 书籍元数据 ===
-BOOK_TITLE = "当LLM不够用了——本体推理的企业决策实践"
+BOOK_TITLE = "当LLM不够用了"
 BOOK_AUTHOR = "森林瀑布"
 BOOK_LANGUAGE = "zh-CN"
 BOOK_DESCRIPTION = (
