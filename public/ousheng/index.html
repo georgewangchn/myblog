@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OuSheng 㸸绳 · 三次穿越 — 多机多 agent 协作的牵引绳</title>
+<meta name="description" content="OuSheng（㸸绳）13 镜技术演示动画：从人工转述的传递损耗，到声明式看板 —— 任务、契约、证据、方案四张卡，把三次人工转述变成零次。">
+<style>
+  /* ═══════ 林间书房色彩体系 ═══════ */
+  :root {
+    --page:   #faf8f3;
+    --card:   #ffffff;
+    --pine:   #1a6b4f;
+    --pLight: #e8f2ed;
+    --stream: #3d8ab5;
+    --sLight: #ecf4f9;
+    --ink:    #2d2d38;
+    --body:   #4a4a58;
+    --muted:  #787888;
+    --dim:    #a0a0b0;
+    --line:   #e0ded8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--page);
+    color: var(--body);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    display: flex; flex-direction: column; align-items: center;
+    min-height: 100vh; padding: 48px 20px;
+  }
+  .container { max-width: 960px; width: 100%; }
+
+  .back {
+    color: var(--stream); text-decoration: none; font-size: 14px;
+    display: inline-block; margin-bottom: 28px; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .back:hover { color: var(--pine); }
+
+  .tag {
+    display: inline-block;
+    background: var(--pLight);
+    color: var(--pine);
+    padding: 5px 14px; border-radius: 20px; font-size: 13px;
+    margin-bottom: 20px; font-weight: 550;
+    border: 1px solid rgba(26,107,79,0.22);
+  }
+
+  h1 {
+    font-size: 28px; font-weight: 700; color: var(--ink);
+    margin-bottom: 10px; letter-spacing: 0.04em;
+  }
+
+  .subtitle {
+    color: var(--muted); font-size: 16px; margin-bottom: 36px;
+    line-height: 1.75;
+  }
+
+  .video-wrap {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden; margin-bottom: 36px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .video-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #0E1116;
+  }
+  .video-frame iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; border: 0; display: block;
+  }
+
+  .note {
+    font-size: 14px; color: var(--muted); line-height: 1.9;
+    border-top: 1px solid var(--line); padding-top: 28px;
+  }
+  .note strong { color: var(--ink); font-weight: 650; }
+  .note a {
+    color: var(--stream); text-decoration: none; font-weight: 500;
+  }
+  .note a:hover { color: var(--pine); }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="/" class="back">← 返回首页</a>
+
+  <span class="tag">宣传动画 · 13 镜 / 3 分 26 秒</span>
+  <h1>OuSheng 㸸绳 · 三次穿越</h1>
+  <p class="subtitle">
+    OuSheng —— 多机多 agent 协作的牵引绳：AI 之间不交换上下文黑箱，<br>
+    只把对方需要知道的四类状态（任务、契约、证据、方案）写成卡，挂到同一块板上。<br>
+    三次人工转述，变零次。
+  </p>
+
+  <div class="video-wrap">
+    <div class="video-frame">
+      <iframe src="https://player.bilibili.com/player.html?bvid=BV1Gjxn6VEwE&page=1&high_quality=1&danmaku=0&autoplay=0"
+              scrolling="no" frameborder="no" framespacing="0"
+              allowfullscreen="true"
+              title="OuSheng一个ai coding敏捷看板"></iframe>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>关于 OuSheng（㸸绳）</strong><br>
+    全片四幕 13 镜：痛点（三跳、六跳与十二跳、掉色）→ 是什么（古法看板、AI 的黑箱、
+    四张卡与声明编辑器、共享投影）→ 怎么用（三张网、三道门）→ 收尾（一根绳）。<br>
+    压缩发生在写出时，不在读取时 —— 不读取、不压缩模型上下文；
+    证据门、背书门、拍板门只拦三类状态转移。<br><br>
+    📺 <a href="https://www.bilibili.com/video/BV1Gjxn6VEwE/" target="_blank" rel="noopener">B站观看（高清 / 弹幕 / 全屏）</a>
+    &nbsp;·&nbsp;
+    💻 <a href="https://github.com/georgewangchn/OuSheng">OuSheng GitHub 仓库</a>
+    &nbsp;·&nbsp;
+    📖 <a href="/blog/">配套专栏「当LLM不够用了」系列</a>
+    &nbsp;·&nbsp;
+    🎬 <a href="/demo/index.html">MOSS 演示视频</a>
+  </div>
+</div>
+</body>
+</html>

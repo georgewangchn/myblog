@@ -78,6 +78,28 @@ const latestPosts = allPosts
         </div>
     </section>
 
+    {/* ── OuSheng 宣传动画 ── */}
+    <section class="section-ousheng">
+        <div class="container">
+            <Banner href="/ousheng/" target="_blank">
+                <div slot="media" class="banner-media-demo">
+                    <img src="/ousheng/cover.jpg" alt="OuSheng 㸸绳 宣传动画" loading="lazy" />
+                    <span class="demo-play">▶</span>
+                </div>
+                <div slot="info">
+                    <span class="banner-tag">宣传动画</span>
+                    <h2 class="banner-title">OuSheng 㸸绳 · 三次穿越</h2>
+                    <p class="banner-desc">
+                        多机多 agent 协作的牵引绳 — 13 镜技术演示动画（3 分 26 秒）。<br />
+                        AI 之间不交换上下文黑箱，只把任务、契约、证据、方案四类状态写成卡，挂到同一块板上。<br />
+                        <strong>三次人工转述，变零次。</strong>
+                    </p>
+                </div>
+                <span slot="cta">观看动画 →</span>
+            </Banner>
+        </div>
+    </section>
+
     {/* ── OntologyOps 开源项目 ── */}
     <section class="section-projects">
         <div class="container">
@@ -144,6 +166,7 @@ const latestPosts = allPosts
 }
 .section-book,
 .section-demo,
+.section-ousheng,
 .section-projects,
 .section-practice {
     padding: 24px 0;
